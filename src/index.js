@@ -1,68 +1,45 @@
-import React, { Component, PropTypes } from 'react';
+import React      from 'react';
 import classNames from 'classnames';
-import { Howl } from 'howler';
-import noop from 'lodash/noop';
+import { Howl }   from 'howler';
+import noop       from 'lodash/noop';
 
 import { easeOutCubic } from './helpers/easing';
+import { getStopIconPoints, getPlayIconPoints } from './helpers/icon-points';
 import idGenerator from './helpers/id-generator';
 
+const { Component, PropTypes } = React;
 
-function getInnerSize({size, progressCircleWidth}) {
-  return size - progressCircleWidth * 2
-}
-
-
-function getStopIconPoints({ size, progressCircleWidth }) {
-  const innerSize = getInnerSize({size, progressCircleWidth});
-
-  return [
-    [
-      innerSize * 0.3 + progressCircleWidth,
-      innerSize * 0.3 + progressCircleWidth
-    ], [
-      innerSize * 0.3 + progressCircleWidth,
-      innerSize * 0.7 + progressCircleWidth
-    ], [
-      innerSize * 0.7 + progressCircleWidth,
-      innerSize * 0.7 + progressCircleWidth
-    ], [
-      innerSize * 0.7 + progressCircleWidth,
-      innerSize * 0.3 + progressCircleWidth
-    ]
-  ];
-}
-
-function getPlayIconPoints({ size, progressCircleWidth }) {
-  const innerSize = getInnerSize({size, progressCircleWidth});
-
-  return [
-    [
-      innerSize * 7/20 +  progressCircleWidth,
-      innerSize * 1/4  +  progressCircleWidth
-    ], [
-      innerSize * 7/20 +  progressCircleWidth,
-      innerSize * 3/4  +  progressCircleWidth
-    ], [
-      innerSize * 31/40 + progressCircleWidth,
-      innerSize * 1/2   + progressCircleWidth
-    ], [
-      innerSize * 31/40 + progressCircleWidth,
-      innerSize * 1/2   + progressCircleWidth
-    ]
-  ];
-}
 
 class PlayButton extends Component {
   static propTypes = {
-    url: PropTypes.string.isRequired,
-    audioId: PropTypes.string
-
+    url:                    PropTypes.string.isRequired,
+    active:                 PropTypes.bool,
+    play:                   PropTypes.func,
+    stop:                   PropTypes.func,
+    audioId:                PropTypes.string,
+    size:                   PropTypes.number,
+    progressCircleWidth:    PropTypes.number,
+    progressCircleColor:    PropTypes.string,
+    idleBackgroundColor:    PropTypes.string,
+    activeBackgroundColor:  PropTypes.string,
+    stopIconColor:          PropTypes.string,
+    playIconColor:          PropTypes.string,
+    iconAnimationLength:    PropTypes.number,
+    fadeInLength:           PropTypes.number,
+    fadeOutLength:          PropTypes.number
   }
 
   static defaultProps = {
+    play: noop,
+    stop: noop,
+    size: 45,
+    progressCircleWidth: 4,
+    progressCircleColor: '#78A931',
+    idleBackgroundColor: '#191b1d',
+    activeBackgroundColor: '#191b1d',
+    audioId: idGenerator(),
     stopIconColor: '#FFFFFF',
     playIconColor: '#FFFFFF',
-    audioId: idGenerator(),
     iconAnimationLength: 450
   }
 
@@ -77,7 +54,10 @@ class PlayButton extends Component {
     this.howler = new Howl({
       src:    [ this.props.url ],
       format: 'mp3',
-      onend:  this.props.stop
+      onend:  this.props.stop,
+      onload: () => {
+        this.setState({ loading: false, duration: this.howler.duration() * 1000 })
+      }
     });
 
     this.updateProgress = this.updateProgress.bind(this);
@@ -85,12 +65,12 @@ class PlayButton extends Component {
 
   componentWillReceiveProps(nextProps) {
     if ( this.props.active && !nextProps.active ) {
-      this.setState({ progress: 0 }, () => this.animateIcon('stop') );
+      this.setState({ progress: 0 }, () => this.animateIcon() );
       this.howler.stop();
     } else if ( !this.props.active && nextProps.active ) {
       this.howler.play();
       this.setState({ progress: 0 }, () => {
-        this.animateIcon('stop');
+        this.animateIcon();
         this.updateProgress();
       })
     }
@@ -110,7 +90,7 @@ class PlayButton extends Component {
 
     window.requestAnimationFrame( () => {
       this.setState({
-        progress: (this.howler.seek() * 1000) / this.props.duration
+        progress: (this.howler.seek() * 1000) / this.state.duration
       })
 
       this.updateProgress();
@@ -120,10 +100,10 @@ class PlayButton extends Component {
   animateIcon() {
     const easingFunction = easeOutCubic;
     const startTime = new Date().getTime();
+    const duration = this.props.iconAnimationLength
     const initialPoints = this.state.iconPoints;
     const finalPoints = this.props.active ? getStopIconPoints(this.props)
                                           : getPlayIconPoints(this.props);
-    const duration = this.props.iconAnimationLength
 
     const updatePosition = () => {
       requestAnimationFrame( () => {
