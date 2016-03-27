@@ -1,5 +1,4 @@
 import React      from 'react';
-import classNames from 'classnames';
 import { Howl }   from 'howler';
 import noop       from 'lodash/noop';
 
