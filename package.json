@@ -1,0 +1,40 @@
+{
+  "name": "react-play-button",
+  "version": "1.0.0",
+  "description": "react-play-button React component",
+  "main": "lib/index.js",
+  "jsnext:main": "es6/index.js",
+  "files": [
+    "css",
+    "es6",
+    "lib",
+    "umd"
+  ],
+  "scripts": {
+    "build": "nwb build",
+    "clean": "nwb clean",
+    "start": "nwb serve",
+    "test": "nwb test",
+    "test:watch": "nwb test --server"
+  },
+  "dependencies": {
+    "classnames": "^2.2.3",
+    "howler": "^2.0.0-beta8",
+    "lodash": "^4.6.1"
+  },
+  "peerDependencies": {
+    "react": "^15.0.0-rc.2"
+  },
+  "devDependencies": {
+    "nwb": "0.9.x",
+    "react": "^15.0.0-rc.2",
+    "react-dom": "^15.0.0-rc.2"
+  },
+  "author": "",
+  "homepage": "",
+  "license": "MIT",
+  "repository": "",
+  "keywords": [
+    "react-component"
+  ]
+}
