@@ -63,7 +63,7 @@ class PlayButton extends Component {
     stopIconColor: '#FFFFFF',
     playIconColor: '#FFFFFF',
     audioId: idGenerator(),
-    iconAnimationLength: 1000
+    iconAnimationLength: 450
   }
 
   constructor(props) {
@@ -85,16 +85,14 @@ class PlayButton extends Component {
 
   componentWillReceiveProps(nextProps) {
     if ( this.props.active && !nextProps.active ) {
-      this.setState({ progress: 0, playing: false })
+      this.setState({ progress: 0 }, () => this.animateIcon('stop') );
       this.howler.stop();
     } else if ( !this.props.active && nextProps.active ) {
       this.howler.play();
-      this.setState({ progress: 0, playing: true }, () => {
-        this.animatePlayIcon();
+      this.setState({ progress: 0 }, () => {
+        this.animateIcon('stop');
         this.updateProgress();
       })
-
-
     }
   }
 
@@ -119,17 +117,15 @@ class PlayButton extends Component {
     });
   }
 
-  animatePlayIcon() {
+  animateIcon() {
     const easingFunction = easeOutCubic;
     const startTime = new Date().getTime();
     const initialPoints = this.state.iconPoints;
-    const finalPoints = getStopIconPoints(this.props);
+    const finalPoints = this.props.active ? getStopIconPoints(this.props)
+                                          : getPlayIconPoints(this.props);
     const duration = this.props.iconAnimationLength
 
     const updatePosition = () => {
-      // IF we stopped the track, stop animating!
-      if ( !this.state.playing ) return;
-
       requestAnimationFrame( () => {
         const time = new Date().getTime() - startTime;
 
