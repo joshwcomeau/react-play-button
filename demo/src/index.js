@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {render} from 'react-dom'
 
 import PlayButton from '../../src'
+import styles from './style.css';
+
 
 class Demo extends Component {
   constructor(props) {
@@ -19,7 +21,7 @@ class Demo extends Component {
 
   render() {
     return <div>
-      <h1>react-play-button Demo</h1>
+      <h1 className={styles.title}>React Play Button</h1>
       <PlayButton
         url="https://p.scdn.co/mp3-preview/48e52b22229808784102425b7735be8458d687dc"
         active={this.state.playing}

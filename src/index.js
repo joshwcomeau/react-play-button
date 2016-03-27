@@ -59,6 +59,14 @@ class PlayButton extends Component {
     this.clickHandler   = this.clickHandler.bind(this);
   }
 
+  componentWillMount() {
+    this.setupHowler();
+  }
+
+  componentWillUnmount() {
+    this.howler.unload();
+  }
+
   componentWillReceiveProps(nextProps) {
     // Figure out what needs to happen with these new props.
     const justStartedPlaying  = !this.props.active && nextProps.active;
@@ -95,14 +103,6 @@ class PlayButton extends Component {
     this.animateIcon('play');
 
     this.setState({ progress: 0 });
-  }
-
-  componentWillMount() {
-    this.setupHowler();
-  }
-
-  componentWillUnmount() {
-    this.howler.unload();
   }
 
   setupHowler() {

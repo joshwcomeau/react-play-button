@@ -10,5 +10,14 @@ module.exports = {
   },
   babel: {
     stage: 0
+  },
+  webpack: {
+    loaders: {
+      css: {
+        query: {
+          modules: true
+        }
+      }
+    }
   }
 }
