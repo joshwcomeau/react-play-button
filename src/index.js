@@ -17,6 +17,7 @@ class PlayButton extends Component {
     play:                   PropTypes.func,
     stop:                   PropTypes.func,
     audioId:                PropTypes.string,
+    audioFormat:            PropTypes.string,
     size:                   PropTypes.number,
     progressCircleWidth:    PropTypes.number,
     progressCircleColor:    PropTypes.string,
@@ -30,54 +31,95 @@ class PlayButton extends Component {
   }
 
   static defaultProps = {
-    play: noop,
-    stop: noop,
-    size: 45,
-    progressCircleWidth: 4,
-    progressCircleColor: '#78A931',
-    idleBackgroundColor: '#191b1d',
-    activeBackgroundColor: '#191b1d',
-    audioId: idGenerator(),
-    stopIconColor: '#FFFFFF',
-    playIconColor: '#FFFFFF',
-    iconAnimationLength: 450
+    play:                   noop,
+    stop:                   noop,
+    audioId:                idGenerator(),
+    audioFormat:            'mp3',
+    size:                   45,
+    progressCircleWidth:    4,
+    progressCircleColor:    '#78A931',
+    idleBackgroundColor:    '#191b1d',
+    activeBackgroundColor:  '#191b1d',
+    stopIconColor:          '#FFFFFF',
+    playIconColor:          '#FFFFFF',
+    iconAnimationLength:    450,
+    fadeInLength:           0,
+    fadeOutLength:          0
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      progress: 0,
-      loading: true,
+      progress:   0,
+      loading:    true,
       iconPoints: getPlayIconPoints(props)
     };
 
-    this.howler = new Howl({
-      src:    [ this.props.url ],
-      format: 'mp3',
-      onend:  this.props.stop,
-      onload: () => {
-        this.setState({ loading: false, duration: this.howler.duration() * 1000 })
-      }
-    });
-
     this.updateProgress = this.updateProgress.bind(this);
+    this.clickHandler   = this.clickHandler.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    if ( this.props.active && !nextProps.active ) {
-      this.setState({ progress: 0 }, () => this.animateIcon() );
-      this.howler.stop();
-    } else if ( !this.props.active && nextProps.active ) {
-      this.howler.play();
-      this.setState({ progress: 0 }, () => {
-        this.animateIcon();
-        this.updateProgress();
-      })
+    // Figure out what needs to happen with these new props.
+    const justStartedPlaying  = !this.props.active && nextProps.active;
+    const justStoppedPlaying  = this.props.active && !nextProps.active;
+    const newAudioClip        = this.props.url !== nextProps.url;
+
+    if ( justStartedPlaying ) {
+      this.triggerPlayAudio();
+    } else if ( justStoppedPlaying ) {
+      this.triggerStopAudio();
     }
+
+    if ( newAudioClip ) {
+      this.setupHowler();
+    }
+  }
+
+  triggerPlayAudio() {
+    // Tell howler to drop the beat.
+    this.howler.play()
+    this.howler.fade(0, 1, this.props.fadeInLength);
+
+    // Morph our icon into a stop button
+    this.animateIcon('stop');
+
+    // Reset the progress bar, and start animating it.
+    this.setState({ progress: 0 }, () => this.updateProgress() );
+  }
+
+  triggerStopAudio() {
+    this.howler.fade(1, 0, this.props.fadeOutLength);
+    window.setTimeout(() => this.howler.stop(), this.props.fadeOutLength);
+
+    this.animateIcon('play');
+
+    this.setState({ progress: 0 });
+  }
+
+  componentWillMount() {
+    this.setupHowler();
   }
 
   componentWillUnmount() {
     this.howler.unload();
+  }
+
+  setupHowler() {
+    // If we have a currently-loaded howler, unload it so we can load our new sound.
+    if ( this.howler && this.howler.unload ) this.howler.unload();
+
+    this.howler = new Howl({
+      src:    [ this.props.url ],
+      format: this.props.audioFormat,
+      onend:  this.props.stop,
+      onload: () => {
+        this.setState({
+          loading: false,
+          duration: this.howler.duration(this.props.audioId) * 1000
+        });
+      }
+    });
   }
 
   clickHandler() {
@@ -97,12 +139,12 @@ class PlayButton extends Component {
     });
   }
 
-  animateIcon() {
+  animateIcon(shape) {
     const easingFunction = easeOutCubic;
     const startTime = new Date().getTime();
     const duration = this.props.iconAnimationLength
     const initialPoints = this.state.iconPoints;
-    const finalPoints = this.props.active ? getStopIconPoints(this.props)
+    const finalPoints = shape === 'stop'  ? getStopIconPoints(this.props)
                                           : getPlayIconPoints(this.props);
 
     const updatePosition = () => {
@@ -208,7 +250,7 @@ class PlayButton extends Component {
     const { size, active } = this.props;
 
     return (
-      <svg width={size} height={size} onClick={::this.clickHandler}>
+      <svg width={size} height={size} onClick={this.clickHandler}>
         { this.renderMainCircle() }
         { active ? this.renderProgressBar() : null }
         { this.renderIcon() }
