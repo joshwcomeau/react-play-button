@@ -1,99 +1,91 @@
 .textGreen1     { color: #96CA2D }
 .textGreen2     { color: #B5E655 }
-.textOffwhite   { color: #EDF7F2 }
-.textBlue1      { color: #4BB5C1 }
+.textBlue1      { color: #5DC8EB }
 .textBlue2      { color: #7FC6BC }
+.textWhite      { color: #FFFFFF }
+.textOffwhite   { color: #EDF7F2 }
+.textLightGray  { color: #F2F2F2 }
+.textDarkGray   { color: #333333 }
 
 .bgGreen1       { background-color: #96CA2D }
 .bgGreen2       { background-color: #B5E655 }
-.bgOffwhite     { background-color: #EDF7F2 }
-.bgBlue1        { background-color: #4BB5C1 }
+.bgBlue1        { background-color: #5DC8EB }
 .bgBlue2        { background-color: #7FC6BC }
+.bgWhite        { background-color: #FFFFFF }
+.bgOffwhite     { background-color: #EDF7F2 }
+.bgLightGray    { background-color: #F2F2F2 }
+.bgDarkGray     { background-color: #333333 }
+.bgDarken       { background-color: rgba(0,0,0,0.1) }
 
-
-.header {
-  composes: bgBlue1
-}
-
-.mainHeading {
-  composes: textOffwhite;
-  font-size: 75px;
-  font-family: sans-serif;
-  text-align: center;
-  line-height: 15rem;
-}
-
-.headerBorder {
-  composes: bgGreen1;
-  position: relative;
-  height: 12px;
-}
-
-.content {
-  composes: bgGreen2;
-  position: relative;
-  min-height: 600px;
-}
-
-
-
-
-
-
-
-
-
-/* CSS resets and general tweaks */
 
 *, *:before, *:after {
   box-sizing: border-box;
 }
 
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+html, body {
+  height: 100%;
+}
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+.demo {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
 }
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-	display: block;
+
+body, input, select, textarea {
+  font-family: Lato, sans-serif;
 }
-body {
-	line-height: 1;
+
+
+.header {
+  composes: bgWhite;
 }
-ol, ul {
-	list-style: none;
+
+.mainHeading {
+  composes: textBlue1;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: left;
+  line-height: 80px;
+  flex: 0 0 80px;
 }
-blockquote, q {
-	quotes: none;
+
+.reactLogo {
+  height: 50px;
+  float: left;
+  margin: 15px;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+
+.headerBorder {
+  composes: bgDarken;
+  position: relative;
+  height: 4px;
 }
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
+
+.content {
+  composes: bgLightGray;
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.playButtonContainer {
+  flex: 0 0 350px;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #CCC;
+}
+
+.playButtonControls {
+  flex: 0 0 350px;
+  height: 350px;
+}
+
+.footer {
+  composes: bgDarkGray textWhite;
+  flex: 0 0 12rem;
 }
