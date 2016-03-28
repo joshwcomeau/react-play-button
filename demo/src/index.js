@@ -20,16 +20,30 @@ class Demo extends Component {
   }
 
   render() {
-    return <div>
-      <h1 className={styles.title}>React Play Button</h1>
-      <PlayButton
-        url="https://p.scdn.co/mp3-preview/48e52b22229808784102425b7735be8458d687dc"
-        active={this.state.playing}
-        play={this.togglePlaying}
-        stop={this.togglePlaying}
-      />
-    </div>
+    return (
+      <div>
+        <Header />
+        <Content />
+        <PlayButton
+          url="https://p.scdn.co/mp3-preview/48e52b22229808784102425b7735be8458d687dc"
+          active={this.state.playing}
+          play={this.togglePlaying}
+          stop={this.togglePlaying}
+        />
+      </div>
+    );
   }
 }
+
+const Header = () => (
+  <header className={styles.header}>
+    <h1 className={styles.mainHeading}>React PlayButton</h1>
+    <div className={styles.headerBorder} />
+  </header>
+)
+
+const Content = () => (
+  <div className={styles.content} />
+)
 
 render(<Demo/>, document.querySelector('#demo'))
