@@ -238,8 +238,10 @@ class PlayButton extends Component {
         stroke={progressCircleColor}
         strokeWidth={progressCircleWidth}
         strokeDasharray={circumference}
-        strokeDashoffset={progressWidth}
-        style={{ cursor: 'pointer' }}
+        style={{
+          cursor: 'pointer',
+          strokeDashoffset: progressWidth
+        }}
         fill="transparent"
       />
     );
