@@ -126,10 +126,10 @@ class PlayButton extends Component {
   }
 
   updateProgress() {
-    // Stop immediately if this button is no longer active
-    if ( !this.props.active ) return;
-
     window.requestAnimationFrame( () => {
+      // Stop immediately if this button is no longer active
+      if ( !this.props.active ) return;
+
       this.setState({
         progress: (this.howler.seek() * 1000) / this.state.duration
       })
