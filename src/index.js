@@ -1,11 +1,12 @@
 import React from 'react';
 import { Howl } from 'howler';
-import noop from 'lodash/noop';
 import PropTyoes from 'prop-types';
 
 import { easeOutCubic } from './helpers/easing';
 import { getStopIconPoints, getPlayIconPoints } from './helpers/icon-points';
 import idGenerator from './helpers/id-generator';
+
+const noop = () => {};
 
 const { Component } = React;
 
