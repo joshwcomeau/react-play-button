@@ -1,6 +1,6 @@
 import React from 'react';
 import { Howl } from 'howler';
-import PropTyoes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { easeOutCubic } from './helpers/easing';
 import { getStopIconPoints, getPlayIconPoints } from './helpers/icon-points';
