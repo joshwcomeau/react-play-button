@@ -31,113 +31,303 @@
  *
  */
 
-
-export function linearEase(currentIteration, startValue, changeInValue, totalIterations) {
-	return changeInValue * currentIteration / totalIterations + startValue;
+export function linearEase(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (changeInValue * currentIteration) / totalIterations + startValue;
 }
 
-export function easeInQuad(currentIteration, startValue, changeInValue, totalIterations) {
-	return changeInValue * (currentIteration /= totalIterations) * currentIteration + startValue;
+export function easeInQuad(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (
+    changeInValue * (currentIteration /= totalIterations) * currentIteration +
+    startValue
+  );
 }
 
-export function easeOutQuad(currentIteration, startValue, changeInValue, totalIterations) {
-	return -changeInValue * (currentIteration /= totalIterations) * (currentIteration - 2) + startValue;
+export function easeOutQuad(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (
+    -changeInValue *
+      (currentIteration /= totalIterations) *
+      (currentIteration - 2) +
+    startValue
+  );
 }
 
-export function easeInOutQuad(currentIteration, startValue, changeInValue, totalIterations) {
-	if ((currentIteration /= totalIterations / 2) < 1) {
-		return changeInValue / 2 * currentIteration * currentIteration + startValue;
-	}
-	return -changeInValue / 2 * ((--currentIteration) * (currentIteration - 2) - 1) + startValue;
+export function easeInOutQuad(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  if ((currentIteration /= totalIterations / 2) < 1) {
+    return (
+      (changeInValue / 2) * currentIteration * currentIteration + startValue
+    );
+  }
+  return (
+    (-changeInValue / 2) * (--currentIteration * (currentIteration - 2) - 1) +
+    startValue
+  );
 }
 
-export function easeInCubic(currentIteration, startValue, changeInValue, totalIterations) {
-	return changeInValue * Math.pow(currentIteration / totalIterations, 3) + startValue;
+export function easeInCubic(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (
+    changeInValue * Math.pow(currentIteration / totalIterations, 3) + startValue
+  );
 }
 
-export function easeOutCubic(currentIteration, startValue, changeInValue, totalIterations) {
-	return changeInValue * (Math.pow(currentIteration / totalIterations - 1, 3) + 1) + startValue;
+export function easeOutCubic(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (
+    changeInValue * (Math.pow(currentIteration / totalIterations - 1, 3) + 1) +
+    startValue
+  );
 }
 
-export function easeInOutCubic(currentIteration, startValue, changeInValue, totalIterations) {
-	if ((currentIteration /= totalIterations / 2) < 1) {
-		return changeInValue / 2 * Math.pow(currentIteration, 3) + startValue;
-	}
-	return changeInValue / 2 * (Math.pow(currentIteration - 2, 3) + 2) + startValue;
+export function easeInOutCubic(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  if ((currentIteration /= totalIterations / 2) < 1) {
+    return (changeInValue / 2) * Math.pow(currentIteration, 3) + startValue;
+  }
+  return (
+    (changeInValue / 2) * (Math.pow(currentIteration - 2, 3) + 2) + startValue
+  );
 }
 
-export function easeInQuart(currentIteration, startValue, changeInValue, totalIterations) {
-	return changeInValue * Math.pow (currentIteration / totalIterations, 4) + startValue;
+export function easeInQuart(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (
+    changeInValue * Math.pow(currentIteration / totalIterations, 4) + startValue
+  );
 }
 
-export function easeOutQuart(currentIteration, startValue, changeInValue, totalIterations) {
-	return -changeInValue * (Math.pow(currentIteration / totalIterations - 1, 4) - 1) + startValue;
+export function easeOutQuart(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (
+    -changeInValue * (Math.pow(currentIteration / totalIterations - 1, 4) - 1) +
+    startValue
+  );
 }
 
-export function easeInOutQuart(currentIteration, startValue, changeInValue, totalIterations) {
-	if ((currentIteration /= totalIterations / 2) < 1) {
-		return changeInValue / 2 * Math.pow(currentIteration, 4) + startValue;
-	}
-	return -changeInValue/2 * (Math.pow(currentIteration - 2, 4) - 2) + startValue;
+export function easeInOutQuart(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  if ((currentIteration /= totalIterations / 2) < 1) {
+    return (changeInValue / 2) * Math.pow(currentIteration, 4) + startValue;
+  }
+  return (
+    (-changeInValue / 2) * (Math.pow(currentIteration - 2, 4) - 2) + startValue
+  );
 }
 
-export function easeInQuint(currentIteration, startValue, changeInValue, totalIterations) {
-	return changeInValue * Math.pow (currentIteration / totalIterations, 5) + startValue;
+export function easeInQuint(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (
+    changeInValue * Math.pow(currentIteration / totalIterations, 5) + startValue
+  );
 }
 
-export function easeOutQuint(currentIteration, startValue, changeInValue, totalIterations) {
-	return changeInValue * (Math.pow(currentIteration / totalIterations - 1, 5) + 1) + startValue;
+export function easeOutQuint(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (
+    changeInValue * (Math.pow(currentIteration / totalIterations - 1, 5) + 1) +
+    startValue
+  );
 }
 
-export function easeInOutQuint(currentIteration, startValue, changeInValue, totalIterations) {
-	if ((currentIteration /= totalIterations / 2) < 1) {
-		return changeInValue / 2 * Math.pow(currentIteration, 5) + startValue;
-	}
-	return changeInValue / 2 * (Math.pow(currentIteration - 2, 5) + 2) + startValue;
+export function easeInOutQuint(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  if ((currentIteration /= totalIterations / 2) < 1) {
+    return (changeInValue / 2) * Math.pow(currentIteration, 5) + startValue;
+  }
+  return (
+    (changeInValue / 2) * (Math.pow(currentIteration - 2, 5) + 2) + startValue
+  );
 }
 
-export function easeInSine(currentIteration, startValue, changeInValue, totalIterations) {
-	return changeInValue * (1 - Math.cos(currentIteration / totalIterations * (Math.PI / 2))) + startValue;
+export function easeInSine(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (
+    changeInValue *
+      (1 - Math.cos((currentIteration / totalIterations) * (Math.PI / 2))) +
+    startValue
+  );
 }
 
-export function easeOutSine(currentIteration, startValue, changeInValue, totalIterations) {
-	return changeInValue * Math.sin(currentIteration / totalIterations * (Math.PI / 2)) + startValue;
+export function easeOutSine(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (
+    changeInValue *
+      Math.sin((currentIteration / totalIterations) * (Math.PI / 2)) +
+    startValue
+  );
 }
 
-export function easeInOutSine(currentIteration, startValue, changeInValue, totalIterations) {
-	return changeInValue / 2 * (1 - Math.cos(Math.PI * currentIteration / totalIterations)) + startValue;
+export function easeInOutSine(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (
+    (changeInValue / 2) *
+      (1 - Math.cos((Math.PI * currentIteration) / totalIterations)) +
+    startValue
+  );
 }
 
-export function easeInExpo(currentIteration, startValue, changeInValue, totalIterations) {
-	return changeInValue * Math.pow(2, 10 * (currentIteration / totalIterations - 1)) + startValue;
+export function easeInExpo(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (
+    changeInValue * Math.pow(2, 10 * (currentIteration / totalIterations - 1)) +
+    startValue
+  );
 }
 
-export function easeOutExpo(currentIteration, startValue, changeInValue, totalIterations) {
-	return changeInValue * (-Math.pow(2, -10 * currentIteration / totalIterations) + 1) + startValue;
+export function easeOutExpo(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (
+    changeInValue *
+      (-Math.pow(2, (-10 * currentIteration) / totalIterations) + 1) +
+    startValue
+  );
 }
 
-export function easeInOutExpo(currentIteration, startValue, changeInValue, totalIterations) {
-	if ((currentIteration /= totalIterations / 2) < 1) {
-		return changeInValue / 2 * Math.pow(2, 10 * (currentIteration - 1)) + startValue;
-	}
-	return changeInValue / 2 * (-Math.pow(2, -10 * --currentIteration) + 2) + startValue;
+export function easeInOutExpo(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  if ((currentIteration /= totalIterations / 2) < 1) {
+    return (
+      (changeInValue / 2) * Math.pow(2, 10 * (currentIteration - 1)) +
+      startValue
+    );
+  }
+  return (
+    (changeInValue / 2) * (-Math.pow(2, -10 * --currentIteration) + 2) +
+    startValue
+  );
 }
 
-export function easeInCirc(currentIteration, startValue, changeInValue, totalIterations) {
-	return changeInValue * (1 - Math.sqrt(1 - (currentIteration /= totalIterations) * currentIteration)) + startValue;
+export function easeInCirc(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (
+    changeInValue *
+      (1 -
+        Math.sqrt(
+          1 - (currentIteration /= totalIterations) * currentIteration
+        )) +
+    startValue
+  );
 }
 
-export function easeOutCirc(currentIteration, startValue, changeInValue, totalIterations) {
-	return changeInValue * Math.sqrt(1 - (currentIteration = currentIteration / totalIterations - 1) * currentIteration) + startValue;
+export function easeOutCirc(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  return (
+    changeInValue *
+      Math.sqrt(
+        1 -
+          (currentIteration = currentIteration / totalIterations - 1) *
+            currentIteration
+      ) +
+    startValue
+  );
 }
 
-export function easeInOutCirc(currentIteration, startValue, changeInValue, totalIterations) {
-	if ((currentIteration /= totalIterations / 2) < 1) {
-		return changeInValue / 2 * (1 - Math.sqrt(1 - currentIteration * currentIteration)) + startValue;
-	}
-	return changeInValue / 2 * (Math.sqrt(1 - (currentIteration -= 2) * currentIteration) + 1) + startValue;
+export function easeInOutCirc(
+  currentIteration,
+  startValue,
+  changeInValue,
+  totalIterations
+) {
+  if ((currentIteration /= totalIterations / 2) < 1) {
+    return (
+      (changeInValue / 2) *
+        (1 - Math.sqrt(1 - currentIteration * currentIteration)) +
+      startValue
+    );
+  }
+  return (
+    (changeInValue / 2) *
+      (Math.sqrt(1 - (currentIteration -= 2) * currentIteration) + 1) +
+    startValue
+  );
 }
-
 
 //// My easing ones
 //  t: current time
@@ -145,12 +335,12 @@ export function easeInOutCirc(currentIteration, startValue, changeInValue, total
 //  c: change in value
 //  d: duration
 export function customEaseInOutQuart(t, b, c, d) {
-  if ((t /= d / 2) < 1) return c / 2 * t * t * t * t + b;
-  return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
+  if ((t /= d / 2) < 1) return (c / 2) * t * t * t * t + b;
+  return (-c / 2) * ((t -= 2) * t * t * t - 2) + b;
 }
 
 export function customLinear(t, b, c, d) {
-  if ( t > d ) return b + c;
+  if (t > d) return b + c;
   const ratio = t / d;
-  return b + (c * ratio);
+  return b + c * ratio;
 }

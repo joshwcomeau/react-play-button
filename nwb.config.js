@@ -2,22 +2,22 @@ module.exports = {
   type: 'react-component',
   build: {
     externals: {
-      'react': 'React'
+      react: 'React',
     },
     global: 'PlayButton',
     jsNext: true,
-    umd: true
+    umd: true,
   },
   babel: {
-    stage: 0
+    stage: 0,
   },
   webpack: {
     loaders: {
       css: {
         query: {
-          modules: true
-        }
-      }
-    }
-  }
-}
+          modules: true,
+        },
+      },
+    },
+  },
+};

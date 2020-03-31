@@ -26,8 +26,9 @@
   },
   "devDependencies": {
     "nwb": "0.9.x",
-    "react": "^15.0.0-rc.2",
-    "react-dom": "^15.0.0-rc.2"
+    "prop-types": "^15.7.2",
+    "react": "^16",
+    "react-dom": "^16"
   },
   "author": "",
   "homepage": "",
