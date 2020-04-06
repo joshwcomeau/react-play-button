@@ -1,16 +1,32 @@
 # react-play-button
 
-[![Travis][build-badge]][build]
-[![npm package][npm-badge]][npm]
-[![Coveralls][coveralls-badge]][coveralls]
+A React component that gives you a "Play / Stop" button.
 
-Describe react-play-button here.
+### Component props
 
-[build-badge]: https://img.shields.io/travis/user/repo/master.svg?style=flat-square
-[build]: https://travis-ci.org/user/repo
-
-[npm-badge]: https://img.shields.io/npm/v/npm-package.svg?style=flat-square
-[npm]: https://www.npmjs.org/package/npm-package
-
-[coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.svg?style=flat-square
-[coveralls]: https://coveralls.io/github/user/repo
+```js
+const propTypes = {
+  url: PropTypes.string.isRequired,
+  // Whether or not it's currently playing
+  active: PropTypes.bool,
+  // Callback that will be called when the sample is played
+  play: PropTypes.func,
+  // Callback that will be called when the sample is stopped
+  stop: PropTypes.func,
+  // Diameter of the button, in pixels
+  size: PropTypes.number,
+  // Styles for the outer ring that displays time progress
+  progressCircleWidth: PropTypes.number,
+  progressCircleColor: PropTypes.string,
+  // Various colors for the button elements
+  idleBackgroundColor: PropTypes.string,
+  activeBackgroundColor: PropTypes.string,
+  stopIconColor: PropTypes.string,
+  playIconColor: PropTypes.string,
+  // How quickly the play icon should morph into the stop icon
+  iconAnimationLength: PropTypes.number,
+  // How long the audio should be faded in/out when playing/stopping
+  fadeInLength: PropTypes.number,
+  fadeOutLength: PropTypes.number,
+};
+```
